@@ -3,7 +3,8 @@ This will be the successor to DDevLib.
 
 **This project is WIP**
 
-**TODO:**
+
+### TODO:
 * Write theme-able scss components
 * Write web components complementing the styles
 * Make adding more projects easier
