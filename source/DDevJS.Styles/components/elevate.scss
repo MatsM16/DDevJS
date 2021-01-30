@@ -1,0 +1,27 @@
+.dd-elevate
+{
+    /* Three loops to maintain specificity order (normal < hover < active)*/
+    @for $i from 0 through 5
+    {
+        &.dd-elevate--#{$i}
+        {
+            box-shadow: var(--dd-shadow-#{$i});
+        }
+    }
+    @for $i from 0 through 5
+    {
+        &.dd-elevate--hover-#{$i}:focus-within,
+        &.dd-elevate--hover-#{$i}:focus,
+        &.dd-elevate--hover-#{$i}:hover
+        {
+            box-shadow: var(--dd-shadow-#{$i});
+        }
+    }
+    @for $i from 0 through 5
+    {
+        &.dd-elevate--active-#{$i}:active
+        {
+            box-shadow: var(--dd-shadow-#{$i});
+        }
+    }
+}

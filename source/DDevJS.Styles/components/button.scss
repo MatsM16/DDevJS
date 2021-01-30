@@ -1,0 +1,225 @@
+@import "../functions/px_rem";
+@import "../utils/color-themes";
+
+.dd-button
+{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: px_rem(32);
+    min-width: px_rem(64);
+    padding: 0 px_rem(8);
+    border-radius: var(--dd-component-radius);
+    cursor: pointer;
+    box-sizing: border-box;
+    user-select: none;
+    position: relative;
+    text-decoration: none;
+
+    &::before
+    {
+        display: none;
+        content: "";
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+    }
+
+    .dd-button__text
+    {
+        display: block;
+        margin: 0 px_rem(8);
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+    }
+
+    .dd-button__icon
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: px_rem(18);
+        height: px_rem(18);
+        margin-left: px_rem(4);
+        position: relative;
+        z-index: 1;
+
+        img,svg
+        {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            fill: currentColor;
+        }
+
+    }
+    .dd-button__text ~ .dd-button__icon
+    {
+        margin-left: 0;
+        margin-right: px_rem(4);
+    }
+
+    &.dd-button--filled
+    {
+        @each $theme in $color-themes
+        {
+            &.dd-button--#{$theme}
+            {
+                background-color: var(--dd-#{$theme});
+                color: var(--dd-on-#{$theme});
+        
+                &:focus,
+                &:hover
+                {
+                    background-color: var(--dd-#{$theme}-d);
+                    color: var(--dd-on-#{$theme}-d);
+                }
+        
+                &:active
+                {
+                    background-color: var(--dd-#{$theme}-l);
+                    color: var(--dd-on-#{$theme}-l);
+                }
+            }
+        }
+
+        &.dd-button--disabled
+        {
+            cursor: not-allowed;
+            background-color: var(--dd-gray);
+            color: var(--dd-on-gray);
+            opacity: 0.65;
+
+            &:focus,
+            &:hover 
+            {
+                background-color: var(--dd-gray);
+                color: var(--dd-on-gray);
+            }
+
+            &:active
+            {
+                background-color: var(--dd-gray);
+                color: var(--dd-on-gray);
+            }
+        }
+    }
+
+    &.dd-button--outlined
+    {
+        &::before 
+        {
+            display: block;
+            opacity: 0;
+        }
+
+        border: 1px solid currentColor;
+
+        @each $theme in $color-themes
+        {
+            &.dd-button--#{$theme}
+            {
+                color: var(--dd-#{$theme});
+                
+                &::before
+                {
+                    background-color: var(--dd-#{$theme});
+                }
+
+                &:focus::before,
+                &:hover::before
+                {
+                    opacity: 0.2;
+                }
+        
+                &:active::before
+                {
+                    opacity: 0.15;
+                }
+            }
+        }
+
+        &.dd-button--disabled
+        {
+            color:var(--dd-gray);
+            cursor: not-allowed;
+
+            &::before
+            {
+                opacity: 0.15;
+                background-color: var(--dd-gray);
+            }
+            &:focus::before,
+            &:hover::before
+            {
+                opacity: 0.15;
+            }
+            &:active::before
+            {
+                opacity: 0.15;
+            }
+        }
+    }
+
+    &.dd-button--text
+    {
+        &::before 
+        {
+            display: block;
+            opacity: 0;
+        }
+
+        @each $theme in $color-themes
+        {
+            &.dd-button--#{$theme}
+            {
+                color: var(--dd-#{$theme});
+                
+                &::before
+                {
+                    background-color: var(--dd-#{$theme});
+                }
+
+                &:focus::before,
+                &:hover::before
+                {
+                    opacity: 0.2;
+                }
+        
+                &:active::before
+                {
+                    opacity: 0.15;
+                }
+            }
+        }
+
+        &.dd-button--disabled
+        {
+            color: var(--dd-gray);
+            cursor: not-allowed;
+
+            &::before
+            {
+                opacity: 0.15;
+                background-color: var(--dd-gray);
+            }
+            &:hover::before
+            {
+                opacity: 0.15;
+            }
+            &:active::before
+            {
+                opacity: 0.15;
+            }
+        }
+    }
+}
+
+@media (any-pointer: coarse)
+{ .dd-button { outline: none; } }
+
+@media (any-pointer: fine)
+{ .dd-button { outline: none; } }

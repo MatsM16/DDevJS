@@ -1,0 +1,60 @@
+@import "../functions/px_rem";
+
+.dd-nav-content-table
+{
+    display: block;
+}
+
+.dd-nav-content-table-item
+{
+    display: block;
+    position: relative;
+
+    .dd-nav-content-table-item__title
+    {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        height: px_rem(24);
+        padding: 0 px_rem(12);
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--dd-link);
+        box-sizing: border-box;
+
+        &:hover
+        {
+            color: var(--dd-link-d);
+            text-decoration: underline;
+        }
+    }
+
+    .dd-nav-content-table-item__children
+    {
+        display: block;
+        padding-left: px_rem(32);
+    }
+
+    .dd-nav-content-table-item__index
+    {
+        display: block;
+        color: var(--dd-link);
+        text-align: end;
+        position: absolute;
+        box-sizing: border-box;
+        top: 0;
+        right: px_rem(12);
+        width: calc(100% - (#{px_rem(12)} * 2));
+        pointer-events: none;
+
+        &:hover
+        {
+            color: var(--dd-link-d);
+        }
+    }
+}
+
+.dd-nav-content-table > .dd-nav-content-table-item
+{
+    margin-bottom: px_rem(16);
+}

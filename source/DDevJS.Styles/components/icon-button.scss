@@ -1,0 +1,75 @@
+@import "../functions/px_rem";
+
+.dd-icon-button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: px_rem(48);
+    height: px_rem(48);
+    border-radius: 100vw;
+    cursor: pointer;
+    position: relative;
+
+    outline: none;
+
+    &::before,
+    &::after
+    {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        border-radius: inherit;
+        pointer-events: none;
+        background-color: currentColor;
+        opacity: 0;
+    }
+
+    &:focus,
+    &:hover
+    {
+        &::before
+        {
+            opacity: 0.1;
+        }
+    }
+
+    &:active
+    {
+        &::after
+        {
+            opacity: 0.1;
+        }
+    }
+
+    &.dd-icon-button--disabled
+    {
+        opacity: 0.65;
+        cursor: not-allowed;
+        
+        &::after,
+        &::before
+        {
+            display: none;
+        }
+    }
+
+    .dd-icon-button__icon
+    {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: px_rem(24);
+        height: px_rem(24);
+
+        img,svg
+        {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            fill: currentColor;
+        }
+    }
+}

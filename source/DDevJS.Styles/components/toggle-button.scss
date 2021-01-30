@@ -1,0 +1,110 @@
+@import "../functions/px_rem";
+
+.dd-toggle-button
+{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: px_rem(48);
+    height: px_rem(48);
+    border-radius: var(--dd-component-radius);
+    background-color: var(--dd-surface-l);
+    color: var(--dd-on-surface-l);
+    cursor: pointer;
+    user-select: none;
+
+    &:focus,
+    &:hover
+    {
+        background-color: var(--dd-surface);
+        color: var(--dd-on-surface);
+    }
+
+    &:active
+    {
+        background-color: var(--dd-surface-d);
+        color: var(--dd-on-surface-d);
+    }
+
+    &.dd-toggle-button--active
+    {
+        background-color: var(--dd-primary);
+        color: var(--dd-on-primary);
+
+        &:focus,
+        &:hover
+        {
+            background-color: var(--dd-primary-l);
+            color: var(--dd-on-primary-l);
+        }
+    
+        &:active
+        {
+            background-color: var(--dd-primary-d);
+            color: var(--dd-on-primary-d);
+        }
+    }
+
+    &.dd-toggle-button--disabled
+    {
+        cursor: not-allowed;
+
+        &:focus,
+        &:hover
+        {
+            background-color: var(--dd-surface-l);
+            color: var(--dd-on-surface-l);
+        }
+    
+        &:active
+        {
+            background-color: var(--dd-surface-l);
+            color: var(--dd-on-surface-l);
+        }
+
+        .dd-toggle-button__icon
+        {
+            opacity: 0.65;
+        }
+    }
+
+    .dd-toggle-button__icon
+    {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: px_rem(24);
+        height: px_rem(24);
+
+        img,svg
+        {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            fill: currentColor;
+        }
+    }
+}
+
+.dd-toggle-button-group .dd-toggle-button
+{
+    width: px_rem(47);
+    height: px_rem(47);
+    border-radius: 0;
+}
+.dd-toggle-button-group .dd-toggle-button:first-of-type
+{
+    border-top-left-radius: var(--dd-component-radius);
+    border-bottom-left-radius: var(--dd-component-radius);
+}
+.dd-toggle-button-group .dd-toggle-button:last-of-type
+{
+    border-top-right-radius: var(--dd-component-radius);
+    border-bottom-right-radius: var(--dd-component-radius);
+}
+
+@media (any-pointer: coarse)
+{ .dd-toggle-button { outline: none; } }
+
+@media (any-pointer: fine)
+{ .dd-toggle-button { outline: none; } }
