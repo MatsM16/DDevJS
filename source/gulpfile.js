@@ -21,6 +21,11 @@ const path =
     build(fileName)
     {
         return `../build/${fileName || ""}`;
+    },
+
+    demo(fileName)
+    {
+        return `../demo/${fileName || ""}`;
     }
 }
 
@@ -35,7 +40,7 @@ const getBuild =
             .pipe(src(path.source(project, "css")))
             .pipe(concat(`dev.${outFile}`))
             .pipe(minify_css())
-            .pipe(sourcemaps.write(path.build()))
+            .pipe(sourcemaps.write(undefined, {sourceRoot:project}))
             .pipe(dest(path.build()))
 
         const prod = 
@@ -61,7 +66,7 @@ const getBuild =
             .pipe(src(path.source(project, "js")))
             .pipe(concat(`dev.${outFile}`))
             .pipe(minify_js())
-            .pipe(sourcemaps.write(path.build()))
+            .pipe(sourcemaps.write(undefined, {sourceRoot:project}))
             .pipe(dest(path.build()))
 
         const prod = 
@@ -78,22 +83,38 @@ const getBuild =
 
 const tasks = 
 {
-    "pre:clean": function ()
+    "clean:pre": function ()
     {
-        return del(path.build("**"), {force: true});
+        return del([
+            "../build/**",
+            "../demo/**.js",
+            "../demo/**.css",
+            "../demo/**.ts", 
+            "../demo/**.map"
+        ], {force: true});
     },
 
-    "post:clean": function ()
+    "clean:build:post": function ()
     {
         return del(["../build/**", "!../build/**.zip"], {force: true});
     },
 
-    "post:zip": function ()
+    "clean:demo:pre": function ()
+    {
+        return del(["../demo/**.js","../demo/**.css","../demo/**.ts", "../demo/**.map"], {force: true});
+    },
+
+    "zip:build:post": function ()
     {
         return mergeStreams(
             src("../build/dev.**").pipe(zip("dev.ddevjs.zip")).pipe(dest("../build/")),
             src("../build/ddevjs.**").pipe(zip("ddevjs.zip")).pipe(dest("../build/"))
         )
+    },
+
+    "build:demo:post": function ()
+    {
+        return src("../build/dev.**").pipe(dest("../demo/"));
     },
 
     "build:DDevJS.Styles": function ()
@@ -110,13 +131,15 @@ const tasks =
 exports.clean = tasks["clean"];
 
 exports.build = series(
-    tasks["pre:clean"], 
+    tasks["clean:pre"], 
+
 
     parallel(
         tasks["build:DDevJS.Styles"],
         tasks["build:DDevJS.Components"]
     ),
-
-    tasks["post:zip"],
-    tasks["post:clean"]
+    
+    tasks["build:demo:post"],
+    tasks["zip:build:post"],
+    tasks["clean:build:post"]
 );
