@@ -1,0 +1,97 @@
+@import "../functions/px_rem";
+@import "../utils/color-themes";
+@import "./m_iconSelectEffects";
+
+@mixin m_CheckBox($class: string)
+{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: px_rem(24);
+    height: px_rem(24);
+    border-radius: var(--dd-component-radius);
+    border: 2px solid var(--dd-gray);
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    outline: 0;
+
+    transition: var(--dd-transition);
+    transition-property: color;
+
+    @include m_IconSelectEffects();
+
+    &.#{$class}--selected
+    {
+        /*box-shadow: var(--dd-shadow-1);*/
+
+        .#{$class}__mark
+        {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .#{$class}__mark
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: px_rem(24);
+        height: px_rem(24);
+        border-radius: inherit;
+        position: absolute;
+
+        transition: var(--dd-transition);
+        transition-property: background-color, color, opacity, transform;
+
+        opacity: 0;
+        transform: scale(0.8);
+
+        img,svg
+        {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            fill: currentColor;
+        }
+
+        background-color: var(--dd-primary);
+        color: var(--dd-on-primary);
+    }
+    color: var(--dd-primary);
+
+    @each $theme in $color-themes
+    {
+        &.#{$class}--#{$theme}
+        {
+            color: var(--dd-#{$theme});
+    
+            .#{$class}__mark
+            {
+                background-color: var(--dd-#{$theme});
+                color: var(--dd-on-#{$theme});
+            }
+        }
+    }
+
+    &.#{$class}--disabled
+    {
+        cursor: not-allowed;
+        color: var(--dd-gray);
+        opacity: 0.65;
+    
+        .#{$class}__mark
+        {
+            background-color: var(--dd-gray);
+            color: var(--dd-on-gray);
+        }
+
+        &::after
+        {
+            display: none;
+        }
+    }
+}

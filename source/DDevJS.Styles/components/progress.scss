@@ -1,0 +1,92 @@
+@import "../functions/px_rem";
+@import "../utils/color-themes";
+
+.dd-progress
+{
+    display: block;
+    height: px_rem(4);
+    width: 100%;
+    position: relative;
+
+    .dd-progress__bar,
+    .dd-progress__buffer,
+    &::before
+    {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 100%;
+        background-color: currentColor;
+
+        left: var(--dd-progress-start, 0%);
+        right: calc(100% - var(--dd-progress-end, 0%));
+    }
+
+    .dd-progress__bar    { z-index: 2; }
+    .dd-progress__buffer { z-index: 1; }
+    &::before            { z-index: 0; }
+    
+    .dd-progress__buffer 
+    { 
+        overflow: hidden;
+        background-color: transparent;
+        opacity: 0.5;
+        &::after
+        {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: calc(100% + 2rem);
+            left: -1rem;
+            animation: dd-progress-buffer 2s linear forwards infinite;
+            border-bottom: px_rem(4) dotted currentColor;
+            box-sizing: border-box;
+        }
+    }
+    &::before            
+    { 
+        opacity: 0.2; 
+        left: 0; 
+        right: 0;
+    }
+
+    color: var(--dd-primary);
+    @each $theme in $color-themes
+    {
+        &.dd-progress--#{$theme}
+        {
+            color: var(--dd-#{$theme});
+        }
+    }
+}
+
+@keyframes dd-progress-buffer
+{
+    from
+    {
+        transform: translateX(1rem);
+    }
+    to
+    {
+        transform: translateX(-1rem);
+    }
+}
+
+@keyframes dd-progress-loading
+{
+    0%
+    {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(0);
+    }
+    50%
+    {
+        opacity: 1;
+        transform: translateX(0) scaleX(1);
+    }
+    100%
+    {
+        opacity: 1;
+        transform: translateX(50%) scaleX(0);
+    }
+}

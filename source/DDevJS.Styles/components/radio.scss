@@ -1,0 +1,19 @@
+@import "../mixins/m_checkbox";
+
+.dd-radio
+{
+    @include m_CheckBox("dd-radio");
+
+    border-radius: 100vw;
+
+    &.dd-radio--selected
+    {
+        border-color: currentColor;
+    }
+
+    .dd-radio__mark
+    {
+        width: px_rem(14);
+        height: px_rem(14);
+    }
+}

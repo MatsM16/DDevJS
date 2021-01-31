@@ -96,12 +96,7 @@ const tasks =
 
     "clean:build:post": function ()
     {
-        return del(["../build/**", "!../build/**.zip"], {force: true});
-    },
-
-    "clean:demo:pre": function ()
-    {
-        return del(["../demo/**.js","../demo/**.css","../demo/**.ts", "../demo/**.map"], {force: true});
+        return del(["../build/**", "!../build/*.zip"], {force: true});
     },
 
     "zip:build:post": function ()
@@ -131,15 +126,21 @@ const tasks =
 exports.clean = tasks["clean"];
 
 exports.build = series(
+    // 1. Clean build and demo directory
     tasks["clean:pre"], 
 
-
+    // 2. Build all projects
     parallel(
         tasks["build:DDevJS.Styles"],
         tasks["build:DDevJS.Components"]
     ),
     
+    // 3. Copy assets to demo directory
     tasks["build:demo:post"],
+
+    // 4. Bundle built assets in .zip files
     tasks["zip:build:post"],
+
+    // 5. Clean build directory of temporary build files
     tasks["clean:build:post"]
 );

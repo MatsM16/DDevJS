@@ -1,0 +1,6 @@
+@import "../mixins/m_checkbox";
+
+.dd-checkbox
+{
+    @include m_CheckBox("dd-checkbox");
+}

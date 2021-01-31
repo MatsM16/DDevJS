@@ -10,9 +10,12 @@ This will be the successor to DDevLib.
 - [X] Icon button
 - [X] Toogle button
 - [x] FAB
-- [ ] Checkbox
-- [ ] Radiobox
-- [ ] Switch
+- [X] Checkbox
+- [X] Radiobox
+- [X] Switch
+- [X] Elevate
+- [X] Progress
+- [X] Table of content
 - [ ] More...
 
 
