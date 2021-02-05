@@ -1,5 +1,5 @@
 document.onscroll = () =>
-    document.getElementById("top").classList.toggle("hide", document.body.scrollTop === 0);
+    document.getElementById("top").classList.toggle("hide", document.body.scrollTop < document.querySelector("section").clientHeight - 400);
 
 function clickToggleClass(elementClass, toggleClass, disabledClass = undefined)
 {

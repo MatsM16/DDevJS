@@ -1,0 +1,218 @@
+.dd-spinner
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: var(--dd-primary);
+
+    /* Triple dot */
+    .dd-spinner__
+    {
+        &triple_dot,
+        &triple_dot::before,
+        &triple_dot::after
+        {
+            display: block;
+            border-radius: 50%;
+            width: 1.6rem;
+            height: 1.6rem;
+            animation-fill-mode: both;
+            animation: dd-spinner__triple-dot 1.8s infinite ease-in-out;
+        }
+
+        &triple_dot
+        {
+            top: -1.6rem;
+            position: relative;
+            text-indent: -9999em;
+            animation-delay: -0.16s;
+        }
+
+        &triple_dot::before,
+        &triple_dot::after
+        {
+            content: '';
+            position: absolute;
+            top: 0;
+        }
+
+        &triple_dot::before
+        {
+            left: -2.2rem;
+            animation-delay: -0.32s;
+        }
+
+        &triple_dot::after
+        {
+            left: 2.2rem;
+        }
+    }
+
+    /* Spin Square */
+    .dd-spinner__
+    {
+        &spin_square
+        {
+            width: 4rem;
+            height: 4rem;
+            background-color: currentColor;
+            animation: dd-spinner__spin-square 1.2s infinite ease-in-out;
+        }
+    }
+
+    /* Bounce */
+    .dd-spinner__
+    {
+        &bounce
+        {
+            display: block;
+            width: 4em;
+            height: 4em;
+            position: relative;
+        }
+
+        &bounce::before,
+        &bounce::after
+        {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: currentColor;
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+            animation: dd-spinner__bounce 2.0s infinite ease-in-out;
+        }
+
+        &bounce::after
+        {
+            animation-delay: -1.0s;
+        }
+    }
+
+    /* Pulse */
+    .dd-spinner__
+    {
+        &pulse
+        {
+            display: block;
+            width: 4em;
+            height: 4em;
+            background-color: currentColor;
+          
+            border-radius: 100%;
+            animation: dd-spinner__pulse 1.0s infinite ease-in-out;
+        }
+    }
+
+    /* Droplets */
+    .dd-spinner__
+    {
+        &droplets
+        {
+            width: 4em;
+            height: 4em;
+            position: relative;
+            text-align: center;
+            
+            animation: dd-spinner__droplets 2.0s infinite linear;
+        }
+
+        &droplets::before,
+        &droplets::after
+        {
+            content: "";
+            display: block;
+            width: 60%;
+            height: 60%;
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            background-color: currentColor;
+            border-radius: 100%;
+            
+            animation: dd-spinner__bounce 2.0s infinite ease-in-out;
+        }
+
+        &droplets::after
+        {
+            top: auto;
+            bottom: 0;
+            animation-delay: -1.0s;
+        }
+    }
+}
+
+
+@keyframes dd-spinner__triple-dot
+{
+    0%, 80%, 100% 
+    {
+        box-shadow: 0 1.6rem 0 -0.8em currentColor;
+    }
+
+    40% 
+    {
+        box-shadow: 0 1.6rem 0 0 currentColor;
+    }
+}
+
+@keyframes dd-spinner__spin-square
+{
+    0%
+    { 
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+
+    50%
+    { 
+      transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+    }
+
+    100%
+    { 
+      transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+    }
+}
+
+@keyframes dd-spinner__bounce
+{
+    0%, 100%
+    { 
+      transform: scale(0.0);
+    } 
+    
+    50%
+    { 
+      transform: scale(1.0);
+    }
+}
+
+@keyframes dd-spinner__pulse
+{
+    0%
+    { 
+      transform: scale(0);
+    }
+    
+    100%
+    {
+      transform: scale(1.0);
+      opacity: 0;
+    }
+}
+
+@keyframes dd-spinner__droplets 
+{
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
