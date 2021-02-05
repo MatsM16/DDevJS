@@ -44,3 +44,12 @@ Production files do not contain sourcemaps, but offer extra compressed asset var
 | Radio            | **YES**    | *NO*          |
 | Switch           | **YES**    | *NO*          |
 | Table of content | **YES**    | *NO*          |
+
+## Sources
+
+- CSS spinners [SpinKit, GitHub](https://github.com/tobiasahlin/SpinKit) [MIT](https://github.com/tobiasahlin/SpinKit/blob/master/LICENSE)
+- CSS spinners [CssLoaders, GitHub](https://github.com/lukehaas/css-loaders) [MIT](https://github.com/lukehaas/css-loaders/blob/step2/LICENSE)
+
+## License
+
+[MIT](https://mit-license.org/)
